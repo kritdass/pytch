@@ -1,25 +1,14 @@
 # pytch
 
-An simple fetch written in Python.
+A lightweight and elegant fetch for Linux written in Python with 0 dependencies.
 
 ![](./screenshot.png) 
-
-## Dependencies
-
-  - Python >= 3.10
-  - [Nerd Font](https://www.nerdfonts.com/)
-  - [art](https://github.com/sepandhaghighi/art)
-  - [distro](https://github.com/python-distro/distro)
-  - [psutil](https://github.com/giampaolo/psutil)
-  - [termcolor](https://github.com/termcolor/termcolor)
 
 ## Installation
 
 ```
   $ git clone https://github.com/kritdass/pytch.git
-  $ sudo ln -s /path/to/pytch/pytch.py /usr/bin/pytch
+  $ cd /path/to/pytch/
+  $ pip install .
 ```
 
-## Configuration
-
-Pytch is configured by editing its source code. This may seem intimidating but it is a simple 81-line file.
