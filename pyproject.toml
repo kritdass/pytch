@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyftch"
-version = "1.0.1"
+version = "1.0.2"
 description = "A lightweight and elegant fetch for Linux written in Python with no dependencies."
 readme = "README.md"
 authors = [{ name = "Krit Dass", email = "dasskrit@gmail.com" }]

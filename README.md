@@ -13,4 +13,4 @@ Pyftch is a small and efficient fetch script inspired by [nitch](https://github.
 ```
   $ pip install pyftch
 ```
-
+You will need a [Nerd Font](https://www.nerdfonts.com/) to see the icons. I use [JetFlow](https://github.com/kritdass/JetFlow).
