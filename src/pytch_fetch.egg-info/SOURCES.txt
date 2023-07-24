@@ -3,7 +3,6 @@ README.md
 pyproject.toml
 src/pytch/__init__.py
 src/pytch/__main__.py
-src/pytch/__version__.py
 src/pytch/art.py
 src/pytch/funcs.py
 src/pytch_fetch.egg-info/PKG-INFO

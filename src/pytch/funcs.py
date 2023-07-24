@@ -3,7 +3,7 @@ from os.path import isfile
 from platform import release
 from subprocess import check_output, DEVNULL, CalledProcessError
 from re import search, findall, sub, split
-from art import art_dict
+from pytch.art import art_dict
 
 
 def color(text, color):

@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 
-from __version__ import __version__
 from os import getlogin
 from argparse import ArgumentParser
-from funcs import (
+from pytch.funcs import (
     get_name,
     get_uptime,
     get_shell,
@@ -30,7 +29,7 @@ def main():
         help="use an alternate distribution's logo",
     )
 
-    parser.add_argument("-v", "--version", action="version", version=__version__)
+    parser.add_argument("-v", "--version", action="version", version="1.0.1")
 
     args = parser.parse_args()
 
