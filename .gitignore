@@ -2,7 +2,7 @@ __pycache__/
 /build
 /dist
 /env
-pyftch.egg-info
+pytch.egg-info
 .eggs
 tox.ini
 /.tox

@@ -1,0 +1,2 @@
+[console_scripts]
+pytch = pytch.__main__:main

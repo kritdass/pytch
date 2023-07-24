@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/pytch/__init__.py
+src/pytch/__main__.py
+src/pytch/__version__.py
+src/pytch/art.py
+src/pytch/funcs.py
+src/pytch_fetch.egg-info/PKG-INFO
+src/pytch_fetch.egg-info/SOURCES.txt
+src/pytch_fetch.egg-info/dependency_links.txt
+src/pytch_fetch.egg-info/entry_points.txt
+src/pytch_fetch.egg-info/top_level.txt
