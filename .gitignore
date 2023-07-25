@@ -3,6 +3,7 @@ __pycache__/
 /dist
 /env
 pytch.egg-info
+pytch_fetch.egg-info
 .eggs
 tox.ini
 /.tox
