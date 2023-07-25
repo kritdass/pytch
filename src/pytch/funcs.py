@@ -107,7 +107,7 @@ def get_uptime():
         boot = get_output("sysctl -n kern.boottime")
         boot = findall(r"sec = \d+", boot)[0].split(" ")[2]
         now = get_output("date +%s")
-        seconds = now - boot
+        seconds = int(now) - int(boot)
     else:
         with open("/proc/uptime", "r") as file:
             seconds = int(float(file.readline().split()[0]))
