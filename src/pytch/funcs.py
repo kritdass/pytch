@@ -151,7 +151,7 @@ def get_memory():
 def get_packages():
     def get_lines(cmd):
         packages = get_output(cmd)
-        num_pkgs = len(packages.splitlines()) - 1
+        num_pkgs = len(packages.splitlines())
         return str(num_pkgs)
 
     packages = []
