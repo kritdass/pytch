@@ -1,9 +1,14 @@
 from os import walk, environ
 from os.path import isfile
 from platform import release
+from sys import platform
 from subprocess import check_output, DEVNULL, CalledProcessError
 from re import search, findall, sub, split
 from pytch.art import art_dict
+
+
+def get_output(cmd):
+    return check_output([cmd], shell=True, text=True, stderr=DEVNULL)
 
 
 def color(text, color):
@@ -27,7 +32,7 @@ def art(distro):
         distro = art_dict["default"]
 
     length = max(
-        [len(sub(r"\$\{c[1-6]\}", "", line)) for line in distro["ascii"].split("\n")]
+        [len(sub(r"\$\{c[1-6]\}", "", line)) for line in distro["ascii"].splitlines()]
     )
 
     segments = split(r"\$\{c[1-6]\}", distro["ascii"])[1:]
@@ -42,7 +47,7 @@ def art(distro):
     min_length = 45
     if length < min_length:
         spacer = " " * ((min_length - length) // 2)
-        result = "\n".join([spacer + line + spacer for line in result.split("\n")])
+        result = "\n".join([spacer + line + spacer for line in result.splitlines()])
         length = min_length
 
     return {"art": result, "length": length}
@@ -51,7 +56,7 @@ def art(distro):
 def get_name():
     def get_lsb_release():
         try:
-            return check_output(["lsb_release", "-a"], stderr=DEVNULL, text=True)
+            return get_output("lsb_release -a")
         except (OSError, CalledProcessError):
             return ""
 
@@ -60,23 +65,25 @@ def get_name():
             for release_file in files:
                 if search("(-|_)(release|version)", release_file):
                     with open(release_file, "r") as file:
-                        for pair in file.read().split("\n"):
+                        for pair in file.read().splitlines():
                             if pair.split("=")[0] == "DISTRIB_ID":
                                 return pair.split("=")[1]
         return ""
 
     name = ""
-    if isfile("/etc/os-release") or isfile("/usr/lib/os-release"):
+    if platform == "darwin":
+        name = "Darwin"
+    elif isfile("/etc/os-release") or isfile("/usr/lib/os-release"):
         release_file = (
             "/etc/os-release" if isfile("/etc/os-release") else "/usr/lib/os-release"
         )
         with open(release_file, "r") as os_release:
-            os_release = os_release.read().split("\n")
+            os_release = os_release.read().splitlines()
             for pair in os_release:
                 if pair.split("=")[0] == "NAME":
                     name = pair.split("=")[1]
     elif get_lsb_release():
-        lsb_release = get_lsb_release().split("\n")
+        lsb_release = get_lsb_release().splitlines()
         for pair in lsb_release:
             if pair.split(":")[0] == "Distributor ID":
                 name = pair.split(":")[1].strip()
@@ -91,12 +98,21 @@ def get_kernel():
 
 
 def get_uptime():
-    boot = check_output(['date -d"$(uptime -s)" +%s'], shell=True)
-    now = check_output(["date +%s"], shell=True)
-    seconds = int(now) - int(boot)
+    seconds = 0
+
+    if get_name() == "Darwin":
+        boot = get_output("sysctl -n kern.boottime")
+        boot = findall(r"sec = \d+", boot)[0].split(" ")[2]
+        now = get_output("date +%s")
+        seconds = now - boot
+    else:
+        with open("/proc/uptime", "r") as file:
+            seconds = int(float(file.readline().split()[0]))
+
     hours = seconds // 3600
     seconds -= hours * 3600
     minutes = seconds // 60
+
     return f"{hours}h {minutes}m"
 
 
@@ -108,19 +124,34 @@ def get_shell():
 def get_memory():
     mem_total = ""
     mem_available = ""
-    with open("/proc/meminfo", "r") as mem_file:
-        for pair in mem_file.read().split("\n"):
-            if pair.split(":")[0] == "MemTotal":
-                mem_total = pair.split(":")[1].replace("kB", "").strip()
-            elif pair.split(":")[0] == "MemAvailable":
-                mem_available = pair.split(":")[1].replace("kB", "").strip()
+
+    if get_name() == "Darwin":
+        mem_total = int(get_output("sysctl -n hw_pagesize"))
+        vm_stat = get_output("vm_stat").splitlines()
+        page_size = findall(
+            r"^Mach Virtual Memory Statistics: \(page size of (\d+) bytes\)$",
+            vm_stat[0],
+        )[0]
+        mem = {}
+        for line in vm_stat[1:]:
+            mem[line.split(":")[0]] = int(float(line.split(":")[1].strip()))
+        mem_available = (
+            mem["Pages wired down"] + mem["Pages active"] + mem["Pages inactive"]
+        ) * page_size
+    else:
+        with open("/proc/meminfo", "r") as mem_file:
+            for pair in mem_file.read().splitlines():
+                if pair.split(":")[0] == "MemTotal":
+                    mem_total = pair.split(":")[1].replace("kB", "").strip()
+                elif pair.split(":")[0] == "MemAvailable":
+                    mem_available = pair.split(":")[1].replace("kB", "").strip()
     return f"{int((int(mem_total) - int(mem_available)) / int(mem_total) * 100)}%"
 
 
 def get_packages():
     def get_lines(cmd):
-        packages = check_output([cmd], shell=True, text=True, stderr=DEVNULL)
-        num_pkgs = len(packages.split("\n")) - 1
+        packages = get_output(cmd)
+        num_pkgs = len(packages.splitlines()) - 1
         return str(num_pkgs)
 
     packages = []
