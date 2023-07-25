@@ -21,4 +21,4 @@ You will need a [Nerd Font](https://www.nerdfonts.com/) to see the icons. I use 
 
 - [@ssleert](https://github.com/ssleert) for creating [nitch](https://github.com/ssleert/nitch), which inspired this project
 - [@dylanaraps](https://github.com/dylanaraps) for creating [neofetch](https://github.com/dylanaraps/neofetch), which was a source of reference and logos
-- [@willrson](https://github.com/willrson) for helping add macOS support
+- [@willrson](https://github.com/willrson) and [@kapoorkrish](https://github.com/kapoorkrish) for helping add macOS support

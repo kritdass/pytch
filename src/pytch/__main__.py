@@ -41,7 +41,7 @@ def main():
             "value": (
                 get_name()
                 if get_name() != "Darwin"
-                else get_output("sw_vers -productName")
+                else get_output("sw_vers -productName").strip()
             ),
             "icon": "",
             "color": "yellow",

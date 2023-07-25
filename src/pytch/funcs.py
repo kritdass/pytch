@@ -94,10 +94,7 @@ def get_name():
 
 
 def get_kernel():
-    if get_name() == "Darwin":
-        return get_output("sw_vers -productVersion")
-    else:
-        return release().split("-")[0]
+    return release().split("-")[0].strip()
 
 
 def get_uptime():
@@ -148,7 +145,7 @@ def get_memory():
                     mem_total = pair.split(":")[1].replace("kB", "").strip()
                 elif pair.split(":")[0] == "MemAvailable":
                     mem_available = pair.split(":")[1].replace("kB", "").strip()
-    return f"{int((int(mem_total) / 1024 / 1024 - int(mem_available) / 1024 / 1024) / int(mem_total) * 100)}%"
+    return f"{int((int(mem_total) - int(mem_available)) * 100 / int(mem_total))}%"
 
 
 def get_packages():
