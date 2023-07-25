@@ -105,7 +105,7 @@ def get_uptime():
 
     if get_name() == "Darwin":
         boot = get_output("sysctl -n kern.boottime")
-        boot = findall(r"sec = \d+", boot)[0].split(" ")[2]
+        boot = search(r"sec = (\d+)", boot).group(1)
         now = get_output("date +%s")
         seconds = int(now) - int(boot)
     else:
@@ -129,18 +129,18 @@ def get_memory():
     mem_available = ""
 
     if get_name() == "Darwin":
-        mem_total = int(get_output("sysctl -n hw.pagesize"))
+        mem_total = int(get_output("sysctl -n hw.memsize"))
         vm_stat = get_output("vm_stat").splitlines()
-        page_size = findall(
+        page_size = search(
             r"^Mach Virtual Memory Statistics: \(page size of (\d+) bytes\)$",
             vm_stat[0],
-        )[0]
+        ).group(1)
         mem = {}
         for line in vm_stat[1:]:
             mem[line.split(":")[0]] = int(float(line.split(":")[1].strip()))
         mem_available = (
             mem["Pages wired down"] + mem["Pages active"] + mem["Pages inactive"]
-        ) * page_size
+        ) * int(page_size)
     else:
         with open("/proc/meminfo", "r") as mem_file:
             for pair in mem_file.read().splitlines():
@@ -148,7 +148,7 @@ def get_memory():
                     mem_total = pair.split(":")[1].replace("kB", "").strip()
                 elif pair.split(":")[0] == "MemAvailable":
                     mem_available = pair.split(":")[1].replace("kB", "").strip()
-    return f"{int((int(mem_total) - int(mem_available)) / int(mem_total) * 100)}%"
+    return f"{int((int(mem_total) / 1024 / 1024 - int(mem_available) / 1024 / 1024) / int(mem_total) * 100)}%"
 
 
 def get_packages():
