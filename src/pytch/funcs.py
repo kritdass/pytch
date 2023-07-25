@@ -21,22 +21,23 @@ def color(text, color):
 
 
 def art(distro):
+    try:
+        distro = art_dict[distro.lower()]
+    except KeyError:
+        distro = art_dict["default"]
+
     length = max(
-        [
-            len(sub(r"\$\{c[1-6]\}", "", line))
-            for line in art_dict[distro]["ascii"].split("\n")
-        ]
+        [len(sub(r"\$\{c[1-6]\}", "", line)) for line in distro["ascii"].split("\n")]
     )
 
-    segments = split(r"\$\{c[1-6]\}", art_dict[distro]["ascii"])[1:]
+    segments = split(r"\$\{c[1-6]\}", distro["ascii"])[1:]
     colors = [
-        int(pattern[3]) - 1
-        for pattern in findall(r"\$\{c[1-6]\}", art_dict[distro]["ascii"])
+        int(pattern[3]) - 1 for pattern in findall(r"\$\{c[1-6]\}", distro["ascii"])
     ]
 
     result = ""
     for i in range(len(segments)):
-        result += color(segments[i], art_dict[distro]["colors"][colors[i]])
+        result += color(segments[i], distro["colors"][colors[i]])
 
     min_length = 45
     if length < min_length:
@@ -90,11 +91,12 @@ def get_kernel():
 
 
 def get_uptime():
-    with open("/proc/uptime", "r") as file:
-        seconds = int(float(file.readline().split()[0]))
-        hours = seconds // 3600
-        seconds -= hours * 3600
-        minutes = seconds // 60
+    boot = check_output(['date -d"$(uptime -s)" +%s'], shell=True)
+    now = check_output(["date +%s"], shell=True)
+    seconds = int(now) - int(boot)
+    hours = seconds // 3600
+    seconds -= hours * 3600
+    minutes = seconds // 60
     return f"{hours}h {minutes}m"
 
 
@@ -117,13 +119,15 @@ def get_memory():
 
 def get_packages():
     def get_lines(cmd):
-        packages = check_output([cmd], shell=True, text=True)
+        packages = check_output([cmd], shell=True, text=True, stderr=DEVNULL)
         num_pkgs = len(packages.split("\n")) - 1
         return str(num_pkgs)
 
+    packages = []
+
     name = get_name()
     if name in ["Ubuntu", "Debian", "Linux Mint", "PopOS", "Raspbian"]:
-        return get_lines("dpkg -l")
+        packages.append(f"{get_lines('dpkg -l')} (deb)")
     elif name in [
         "Arch",
         "EndeavourOS",
@@ -133,9 +137,7 @@ def get_packages():
         "Archcraft",
         "Garuda",
     ]:
-        return get_lines("pacman -Qq")
-    elif name == "NixOS":
-        return get_lines("nix-store -qR /run/current-system/sw ~/.nix-profile")
+        packages.append(f"{get_lines('pacman -Qq')} (pcmn)")
     elif name in [
         "Fedora",
         "CentOS",
@@ -144,10 +146,30 @@ def get_packages():
         "openSUSE Leap",
         "RHEL",
     ]:
-        return get_lines("rpm -qa")
+        packages.append(f"{get_lines('rpm -qa')} (rpm)")
     elif name == "Void":
-        return get_lines("xbps-query -l")
+        packages.append(f"{get_lines('xbps-query -l')} (xbps)")
     elif name in ["Gentoo", "ChromeOS"]:
-        return get_lines("ls -d /var/db/pkg/*/*| cut -f5- -d/")
-    else:
-        return "0/0"
+        packages.append(f"{get_lines('ls -d /var/db/pkg/*/*| cut -f5- -d/')} (portage)")
+    elif name == "NixOS":
+        packages.append(
+            f"{get_lines('nix-store -qR /run/current-system/sw ~/.nix-profile')} (nix)"
+        )
+
+    if name != "NixOS":
+        try:
+            packages.append(
+                f"{get_lines('nix-store -qR /nix/var/nix/profiles/default ~/.nix-profile')} (nix)"
+            )
+        except:
+            pass
+
+    try:
+        packages.append(f"{get_lines('brew list')} (brew)")
+    except:
+        pass
+
+    if not packages:
+        packages.append("0/0")
+
+    return packages

@@ -8,7 +8,7 @@
 
 ## Description
 
-Pytch is a small and efficient fetch script written in Python with no dependencies. It has a relatively fast execution time of ~20ms and is tested on Python versions 3.7 or newer and PyPy (it will probably work on earlier versions but has not been tested as such). It is configured by editing its source code, though the Python used is relatively simple and readable. Rest assured, if you do not understand something, open up an issue and I will be happy to explain it to you. At its current state, Pytch only supports a few popular Linux distributions (see [this function](https://github.com/kritdass/pytch/blob/src/pytch/funcs.py#L118) for a list though most are not tested). If support is lacking for your distribution, please open up an issue and I will add support for your distribution. Pull requests are welcome and encouraged, please do not hesitate.
+Pytch is a small and efficient fetch script written in Python with no dependencies. It has a relatively fast execution time of ~20ms and is tested on Python versions 3.7 or newer and PyPy (it will probably work on earlier versions but has not been tested as such). It is configured by editing its source code, though the Python used is relatively simple and readable. Rest assured, if you do not understand something, open up an issue and I will be happy to explain it to you. At its current state, Pytch only supports a few popular Linux distributions and MacOS (see [this function](https://github.com/kritdass/pytch/blob/main/src/pytch/funcs.py#L120) for a list though most are not tested). If support is lacking for your distribution, please open up an issue and I will add support for your distribution. Pull requests are welcome and encouraged, please do not hesitate.
 
 ## Installation
 

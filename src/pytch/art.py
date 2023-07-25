@@ -1,5 +1,22 @@
 art_dict = {
-    "Ubuntu": {
+    "default": {
+        "colors": ["white", "black", "yellow"],
+        "ascii": r"""
+${c2}        #####
+${c2}       #######
+${c2}       ##${c1}O${c2}#${c1}O${c2}##
+${c2}       #${c3}#####${c2}#
+${c2}     ##${c1}##${c3}###${c1}##${c2}##
+${c2}    #${c1}##########${c2}##
+${c2}   #${c1}############${c2}##
+${c2}   #${c1}############${c2}###
+${c3}  ##${c2}#${c1}###########${c2}##${c3}#
+${c3}######${c2}#${c1}#######${c2}#${c3}######
+${c3}#######${c2}#${c1}#####${c2}#${c3}#######
+${c3}  #####${c2}#######${c3}#####
+        """,
+    },
+    "ubuntu": {
         "colors": ["red", "white"],
         "ascii": r"""
 ${c1}            .-/+oossssoo+\-.
@@ -24,7 +41,7 @@ oss${c2}yNMMMNyMMh${c1}sssssssssssssshmmmh${c1}ssssssso
             .-\+oossssoo+/-.
             """,
     },
-    "Debian": {
+    "debian": {
         "colors": ["red", "white"],
         "ascii": """
 ${c2}       _,met$$$$$gg.
@@ -46,7 +63,7 @@ ${c2}  `Y$$
               `\"""
             """,
     },
-    "Linux Mint": {
+    "linux mint": {
         "colors": ["green", "white"],
         "ascii": r"""
 ${c2}             ...-:::::-...
@@ -70,7 +87,7 @@ ${c2}            '-MMMMMMMMMMMMM-'
 ${c2}               ``-:::::-``
             """,
     },
-    "PopOS": {
+    "popos": {
         "colors": ["cyan", "white"],
         "ascii": r"""
 ${c1}             /////////////
@@ -95,7 +112,7 @@ ${c1}             /////////////
              /////////////
             """,
     },
-    "Raspbian": {
+    "raspbian": {
         "colors": ["green", "red"],
         "ascii": r"""
 ${c1}  `.::///+:/-.        --///+//-:``
@@ -123,7 +140,7 @@ ${c1}  `.::///+:/-.        --///+//-:``
              `.-::::-`
             """,
     },
-    "Arch": {
+    "arch": {
         "colors": ["blue", "blue"],
         "ascii": r"""
 ${c1}                   -`
@@ -147,7 +164,7 @@ ${c2}        .oossssso-````/ossssss+`
  .`                                 `/
             """,
     },
-    "EndeavourOS": {
+    "endeavouros": {
         "colors": ["red", "magenta", "blue"],
         "ascii": r"""
 ${c1}                     ./${c2}o${c3}.
@@ -167,7 +184,7 @@ ${c1} `..-+${c2}oosssssssssssssssssssssssso${c3}+++++/`
   `:::::::::::::::::::::::::------``
             """,
     },
-    "Artix": {
+    "artix": {
         "colors": ["cyan"],
         "ascii": r"""
 ${c1}                   '
@@ -192,7 +209,7 @@ ${c1}                   '
 '`                                   `'
             """,
     },
-    "Manjaro": {
+    "manjaro": {
         "colors": ["green"],
         "ascii": r"""
 ${c1}██████████████████  ████████
@@ -211,7 +228,7 @@ ${c1}██████████████████  ██████�
 ████████  ████████  ████████
             """,
     },
-    "ArcoLinux": {
+    "archlinux": {
         "colors": ["white", "blue"],
         "ascii": r"""
 ${c2}                    /-
@@ -236,7 +253,7 @@ ${c2}                    /-
 ooooooooo.                     ${c1}-ooooooooo${c2}
             """,
     },
-    "Archcraft": {
+    "archcraft": {
         "colors": ["cyan"],
         "ascii": r"""
 ${c1}                   -m:
@@ -259,7 +276,7 @@ ${c1}                   -m:
 sMMMMMM+         .mMMMN:    :`   :NMMMMMy
             """,
     },
-    "Garuda": {
+    "garuda": {
         "colors": ["blue", "blue", "yellow", "white", "green", "blue"],
         "ascii": r"""
 ${c3}
@@ -282,7 +299,7 @@ ${c3}
             .d988999889889899dd.
             """,
     },
-    "NixOS": {
+    "nixos": {
         "colors": ["blue", "cyan"],
         "ascii": r"""
 ${c1}          ▗▄▄▄       ${c2}▗▄▄▄▄    ▄▄▄▖
@@ -307,7 +324,7 @@ ${c1}         ▟███▛  ▜███▙       ${c2}▜███▙
 ${c1}         ▝▀▀▀    ▀▀▀▀▘       ${c2}▀▀▀▘
             """,
     },
-    "Fedora": {
+    "fedora": {
         "colors": ["blue", "white"],
         "ascii": r"""
 ${c1}             .',;::::;,'.
@@ -331,7 +348,7 @@ cccccccc;${c2}.:odl:.${c1};cccccccccccccc:,.
   '::cccccccccccccc::;,.
             """,
     },
-    "CentOS": {
+    "centos": {
         "colors": ["yellow", "green", "blue", "magenta"],
         "ascii": r"""
 ${c1}                 ..
@@ -355,7 +372,7 @@ ${c2}              <><><><>
                  ''
             """,
     },
-    "SUSE": {
+    "suse": {
         "colors": ["green", "white"],
         "ascii": r"""
 ${c2}           .;ldkO0000Okdl;.
@@ -378,7 +395,7 @@ dKK${c1}KKKKKKKKKK;.;oOKx,..${c2}^${c1}..;kKKK0.${c2}  dKd
             '^:ldxkkkkxdl:^'
             """,
     },
-    "openSUSE Tumbleweed": {
+    "opensuse tumbleweed": {
         "colors": ["green", "green"],
         "ascii": r"""
 ${c2}                                     ......
@@ -396,7 +413,7 @@ ${c2}                                     ......
          .....                    .:dOOXXKOxl,
             """,
     },
-    "openSUSE Leap": {
+    "opensuse leap": {
         "colors": ["green", "green"],
         "ascii": r"""
 ${c2}                 `-++:`
@@ -417,7 +434,7 @@ ${c2}                 `-++:`
                   `:/.
             """,
     },
-    "RHEL": {
+    "rhel": {
         "colors": ["red"],
         "ascii": r"""
 ${c1}           .MMM..:MMMMMMM
@@ -440,7 +457,7 @@ MMMMMMMMMMM.                     MMMM
                 ``MMMMMMMMMMMMMMMMM'
             """,
     },
-    "Void": {
+    "void": {
         "colors": ["green", "black"],
         "ascii": r"""
 ${c1}                __.;=====;.__
@@ -463,7 +480,7 @@ ${c1}     -1vvnvv.     `~+++`        ++|+++
                -~|{*l}*|~
             """,
     },
-    "Gentoo": {
+    "gentoo": {
         "colors": ["magenta", "white"],
         "ascii": r"""
 ${c1}         -/oyddmdhs+:.
@@ -486,7 +503,7 @@ yM${c2}MNNNNNNNmmmmmNNMmhs+/${c1}-`
   `-//////:--.
             """,
     },
-    "ChromeOS": {
+    "chromeos": {
         "colors": ["green", "red", "yellow", "blue", "white"],
         "ascii": r"""
 ${c2}            .,:loool:,.
@@ -508,5 +525,27 @@ ${c1}      '::ccccccccc${c3}dOOOOOOOkx:.
 ${c1}        ..,::cccc${c3}xOOOkkko;.
 ${c1}            ..,:${c3}dOkxl:.
             """,
+    },
+    "darwin": {
+        "colors": ["green", "yellow", "red", "red", "magenta", "blue"],
+        "ascii": r"""
+${c1}                    c.'
+                 ,xNMM.
+               .OMMMMo
+               lMM"
+     .;loddo:.  .olloddol;.
+   cKMMMMMMMMMMNWMMMMMMMMMM0:
+${c2} .KMMMMMMMMMMMMMMMMMMMMMMMWd.
+ XMMMMMMMMMMMMMMMMMMMMMMMX.
+${c3};MMMMMMMMMMMMMMMMMMMMMMMM:
+:MMMMMMMMMMMMMMMMMMMMMMMM:
+${c4}.MMMMMMMMMMMMMMMMMMMMMMMMX.
+ kMMMMMMMMMMMMMMMMMMMMMMMMWd.
+ ${c5}'XMMMMMMMMMMMMMMMMMMMMMMMMMMk
+  'XMMMMMMMMMMMMMMMMMMMMMMMMK.
+    ${c6}kMMMMMMMMMMMMMMMMMMMMMMd
+     ;KMMMMMMMWXXWMMMMMMMk.
+       "cooc*"    "*coo'"
+        """,
     },
 }

@@ -29,7 +29,7 @@ def main():
         help="use an alternate distribution's logo",
     )
 
-    parser.add_argument("-v", "--version", action="version", version="1.0.1")
+    parser.add_argument("-v", "--version", action="version", version="1.1.0")
 
     args = parser.parse_args()
 
@@ -46,12 +46,43 @@ def main():
     print("\n" + art(args.logo or get_name())["art"])
 
     name_width = max([len(attr["name"]) for attr in attrs])
-    value_width = max([len(attr["value"]) for attr in attrs])
+    value_width = max(
+        [
+            (
+                len(attr["value"])
+                if isinstance(attr["value"], str)
+                else max([len(s) for s in attr["value"]])
+            )
+            for attr in attrs
+        ]
+    )
     gap = art(args.logo or get_name())["length"] - name_width - value_width - 8
 
     print("╭─────╮" + (" " * (name_width + value_width + gap - 2)) + "╭─╮")
 
     for attr in attrs:
+        if attr["name"] == "pkgs":
+            if len(attr["value"]) > 1:
+                for i, packager in enumerate(attr["value"]):
+                    print(
+                        "│ "
+                        + color(
+                            (" " + (attr["icon"] if not i else " ") + "  ")
+                            + (attr["name"] if not i else "")
+                            + (name_width + gap - (len(attr["name"]) if not i else 0))
+                            * " ",
+                            attr["color"],
+                        )
+                        + color(
+                            (" " * (value_width - len(packager))) + packager,
+                            attr["color"],
+                        )
+                        + " │"
+                    )
+                continue
+            else:
+                attr["value"] = attr["value"][0].split(" ")[0]
+
         print(
             "│ "
             + color(
