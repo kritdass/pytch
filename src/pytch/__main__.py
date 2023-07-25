@@ -3,6 +3,7 @@
 from os import getlogin
 from argparse import ArgumentParser
 from pytch.funcs import (
+    get_output,
     get_name,
     get_uptime,
     get_shell,
@@ -35,7 +36,16 @@ def main():
 
     attrs = [
         {"name": "user", "value": getlogin(), "icon": "", "color": "red"},
-        {"name": "os", "value": get_name(), "icon": "", "color": "yellow"},
+        {
+            "name": "os",
+            "value": (
+                get_name()
+                if get_name() != "Darwin"
+                else get_output("sw_vers -productName")
+            ),
+            "icon": "",
+            "color": "yellow",
+        },
         {"name": "kernel", "value": get_kernel(), "icon": "", "color": "green"},
         {"name": "uptime", "value": get_uptime(), "icon": "", "color": "blue"},
         {"name": "shell", "value": get_shell(), "icon": "", "color": "magenta"},

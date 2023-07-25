@@ -94,7 +94,10 @@ def get_name():
 
 
 def get_kernel():
-    return release().split("-")[0]
+    if get_name() == "Darwin":
+        return get_output("sw_vers -productVersion")
+    else:
+        return release().split("-")[0]
 
 
 def get_uptime():
