@@ -129,7 +129,7 @@ def get_memory():
     mem_available = ""
 
     if get_name() == "Darwin":
-        mem_total = int(get_output("sysctl -n hw_pagesize"))
+        mem_total = int(get_output("sysctl -n hw.pagesize"))
         vm_stat = get_output("vm_stat").splitlines()
         page_size = findall(
             r"^Mach Virtual Memory Statistics: \(page size of (\d+) bytes\)$",
