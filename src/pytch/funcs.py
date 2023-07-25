@@ -188,12 +188,20 @@ def get_packages():
         )
 
     if name != "NixOS":
-        try:
-            packages.append(
-                f"{get_lines('nix-store -qR /nix/var/nix/profiles/default ~/.nix-profile')} (nix)"
-            )
-        except:
-            pass
+        if name == "Darwin":
+            try:
+                packages.append(
+                    f"{get_lines('nix-store -qR /run/current-system/sw ~/.nix-profile')} (nix)"
+                )
+            except:
+                pass
+        else:
+            try:
+                packages.append(
+                    f"{get_lines('nix-store -qR /nix/var/nix/profiles/default ~/.nix-profile ')} (nix)"
+                )
+            except:
+                pass
 
     try:
         packages.append(f"{get_lines('brew list')} (brew)")
