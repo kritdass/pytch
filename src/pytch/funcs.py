@@ -6,7 +6,6 @@ from subprocess import check_output, DEVNULL, CalledProcessError
 from re import search, findall, sub, split
 from pytch.art import art_dict
 
-
 def get_output(cmd):
     return check_output([cmd], shell=True, text=True, stderr=DEVNULL)
 
@@ -100,7 +99,7 @@ def get_kernel():
 def get_uptime():
     seconds = 0
 
-    if get_name() == "Darwin":
+    if get_name() in ["Darwin", "FreeBSD"]:
         boot = get_output("sysctl -n kern.boottime")
         boot = search(r"sec = (\d+)", boot).group(1)
         now = get_output("date +%s")
@@ -138,6 +137,10 @@ def get_memory():
         mem_available = (
             mem["Pages wired down"] + mem["Pages active"] + mem["Pages inactive"]
         ) * int(page_size)
+    elif get_name() == "FreeBSD":
+        mem_total = int(get_output("sysctl -n hw.physmem")) / 1024
+        page_size = int(get_output("sysctl -n hw.pagesize"))
+        mem_available = int(get_output("sysctl -n vm.stats.vm.v_free_count")) * page_size / 1024
     else:
         with open("/proc/meminfo", "r") as mem_file:
             for pair in mem_file.read().splitlines():
@@ -145,8 +148,8 @@ def get_memory():
                     mem_total = pair.split(":")[1].replace("kB", "").strip()
                 elif pair.split(":")[0] == "MemAvailable":
                     mem_available = pair.split(":")[1].replace("kB", "").strip()
-    return f"{int((int(mem_total) - int(mem_available)) * 100 / int(mem_total))}%"
 
+    return f"{int((int(mem_total) - int(mem_available)) * 100 / int(mem_total))}%"
 
 def get_packages():
     def get_lines(cmd):
@@ -186,6 +189,8 @@ def get_packages():
         packages.append(
             f"{get_lines('nix-store -qR /run/current-system/sw ~/.nix-profile')} (nix)"
         )
+    elif name == "FreeBSD":
+        packages.append(f"{get_lines('pkg info -q')} (pkg)")
 
     if name != "NixOS":
         if name == "Darwin":
