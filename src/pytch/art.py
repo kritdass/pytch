@@ -568,7 +568,7 @@ ${c2}     `:`                  ${c1}`:`
           .---.....----.
         """,
     },
-    "nobara": {
+    "nobara linux": {
         "colors": ["cyan"],
         "ascii": r"""
 ${c1}MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
