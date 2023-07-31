@@ -179,6 +179,7 @@ def get_packages():
         "openSUSE Tumbleweed",
         "openSUSE Leap",
         "RHEL",
+        "Nobara Linux"
     ]:
         packages.append(f"{get_lines('rpm -qa')} (rpm)")
     elif name == "Void":

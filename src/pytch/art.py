@@ -568,4 +568,29 @@ ${c2}     `:`                  ${c1}`:`
           .---.....----.
         """,
     },
+    "nobara linux": {
+        "colors": ["cyan"],
+        "ascii": r"""
+${c1}MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMN0kkOXWMWNK0OkkkkO0KNWMMMMMMMMMMMMM
+MMMNx,.   .:l:'.        .':okXMMMMMMMMMM
+MMWx.                        'l0WMMMMMMM
+MMWl                           .cKMMMMMM
+MMWl                             'kWMMMM
+MMWl            .;:cc:;.          .kWMMM
+MMWl          ,xXWWNNWWXx,         ,KMMM
+MMWl         :KMKo,'',oKMX:        .dWMM
+MMWl        .kMNc      cNMNOd:.     lWMM
+MMWl        .kMWx.    .xWMKl,.      lWMM
+MMWl        .xWMWKkddkKWMMO.        lWMM
+MMWl         .oOKXNMMMMMMMO.        lWMM
+MMWl            ..,oOXMMMMO.        lWMM
+MMWl                 :XMMMO.        lWMM
+MMWo         .';:;.  .OMMMO.        oWMM
+MMM0;      .cONWMWXxccOMMMNl.      ;0MMM
+MMMMXxc;;;lONMMMMMMWWNNMMMMWOl;,;cxXMMMM
+MMMMMMMWWWMMMMMMMMMMMMMMMMMMMMWWWMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+        """
+    }
 }
