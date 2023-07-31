@@ -6,6 +6,7 @@ from subprocess import check_output, DEVNULL, CalledProcessError
 from re import search, findall, sub, split
 from pytch.art import art_dict
 
+
 def get_output(cmd):
     return check_output([cmd], shell=True, text=True, stderr=DEVNULL)
 
@@ -140,7 +141,9 @@ def get_memory():
     elif get_name() == "FreeBSD":
         mem_total = int(get_output("sysctl -n hw.physmem")) / 1024
         page_size = int(get_output("sysctl -n hw.pagesize"))
-        mem_available = int(get_output("sysctl -n vm.stats.vm.v_free_count")) * page_size / 1024
+        mem_available = (
+            int(get_output("sysctl -n vm.stats.vm.v_free_count")) * page_size / 1024
+        )
     else:
         with open("/proc/meminfo", "r") as mem_file:
             for pair in mem_file.read().splitlines():
@@ -150,6 +153,7 @@ def get_memory():
                     mem_available = pair.split(":")[1].replace("kB", "").strip()
 
     return f"{int((int(mem_total) - int(mem_available)) * 100 / int(mem_total))}%"
+
 
 def get_packages():
     def get_lines(cmd):
@@ -179,7 +183,7 @@ def get_packages():
         "openSUSE Tumbleweed",
         "openSUSE Leap",
         "RHEL",
-        "Nobara Linux"
+        "Nobara Linux",
     ]:
         packages.append(f"{get_lines('rpm -qa')} (rpm)")
     elif name == "Void":

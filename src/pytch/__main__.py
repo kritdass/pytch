@@ -30,7 +30,7 @@ def main():
         help="use an alternate distribution's logo",
     )
 
-    parser.add_argument("-v", "--version", action="version", version="1.2.1")
+    parser.add_argument("-v", "--version", action="version", version="1.2.2")
 
     args = parser.parse_args()
 
