@@ -1,7 +1,26 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+"""
+Pytch - Pytch Yields Technical Characteristics Hastily
+Copyright (c) 2023, Krit Dass
+
+This file is part of Pytch.
+
+Pytch is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License,
+or (at your option) any later version.
+
+Pytch is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License 
+along with Pytch. If not, see <https://www.gnu.org/licenses/>.
+"""
 
 from os import getlogin
-from argparse import ArgumentParser
+from argparse import ArgumentParser, RawTextHelpFormatter
 from pytch.funcs import (
     get_output,
     get_name,
@@ -19,7 +38,10 @@ def main():
     parser = ArgumentParser(
         prog="pytch",
         description="Pytch Yields Technical Characteristics Hastily",
-        epilog="Report bugs to https://github.com/kritdass/pytch/issues",
+        epilog="""Pytch Copyright (c) 2023 Krit Dass
+This program is licensed under the GNU General Public License (see https://www.gnu.org/licenses/).
+Report bugs to https://github.com/kritdass/pytch/issues.""",
+        formatter_class=RawTextHelpFormatter,
     )
 
     parser.add_argument(
@@ -30,7 +52,7 @@ def main():
         help="use an alternate distribution's logo",
     )
 
-    parser.add_argument("-v", "--version", action="version", version="1.2.2")
+    parser.add_argument("-v", "--version", action="version", version="1.2.3")
 
     args = parser.parse_args()
 

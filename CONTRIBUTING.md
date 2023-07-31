@@ -66,7 +66,7 @@ For bug reports, please include:
   <tr>
     <td>Red 🔴</td>
     <td>A pull request that will almost never be accepted. This modifies functionality in a way that goes against the ideas of the project.</td>
-    <td>Do not bother with this idea. If you do want to continue, make your own fetch but follow the terms of our <a href="LICENSE.md">license</a>. If you really think your idea is good, then make an issue with the prefix "Red: ".</td>
+    <td>Do not bother with this idea. If you do want to continue, make your own fetch but follow the terms of our <a href="COPYING">license</a>. If you really think your idea is good, then make an issue with the prefix "Red: ".</td>
     <td>
       <ul>
         <li>Not following <a href="#code-guidelines">code guidelines</a></li>
@@ -81,7 +81,7 @@ For bug reports, please include:
 
 1. Review the [pull request codes](#pull-request-codes), find out which code your pull request comes under, and adhere to its specific guidelines
 2. Mention any and all changes, additions, removals, etc. This includes breaking changes and changes in program structure. Document these in the body of your pull request and the [changelog](CHANGELOG.md).
-3. We use [SemVer](http://semver.org/) for versioning (only make a patch if you are adding support for a distribution or package manager) and
+3. We use [SemVer](http://semver.org/) for versioning (make a patch if you are adding support for a distribution or package manager) and
 [Conventional Commits](https://www.conventionalcommits.org/) for commit messages  (all lowercase) as of 1.2.0. Please follow these guidelines in your commits and in your pull request title.
 4. Ensure that you are following the [code guidelines](#code-guidelines)
 5. Bump the version in `pyproject.toml` and `src/pytch/__main__.py`

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.3 - 2023-07-31
+
+### Fixed
+
+- Conform with GPL guidelines
+
 ## 1.2.2 - 2023-07-31
 
 ### Added
