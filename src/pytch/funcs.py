@@ -25,6 +25,8 @@ from platform import release
 from sys import platform
 from subprocess import check_output, DEVNULL, CalledProcessError
 from re import search, findall, sub, split
+
+from art import text2art
 from pytch.art import art_dict
 
 
@@ -43,27 +45,34 @@ def color(text, color):
         "cyan": 36,
         "white": 37,
     }
-    return f"\033[{colors[color]}m{text}\033[0m"
+    if color not in colors:
+        return text
+    else:
+        return f"\033[{colors[color]}m{text}\033[0m"
 
 
-def art(distro):
+def ascii_image(os, recolor):
     try:
-        distro = art_dict[distro.lower()]
+        os = art_dict[os.lower()]
     except KeyError:
-        distro = art_dict["default"]
+        os = art_dict["default"]
 
     length = max(
-        [len(sub(r"\$\{c[1-6]\}", "", line)) for line in distro["ascii"].splitlines()]
+        [len(sub(r"\$\{c[1-6]\}", "", line)) for line in os["ascii"].splitlines()]
     )
 
-    segments = split(r"\$\{c[1-6]\}", distro["ascii"])[1:]
-    colors = [
-        int(pattern[3]) - 1 for pattern in findall(r"\$\{c[1-6]\}", distro["ascii"])
-    ]
+    segments = split(r"\$\{c[1-6]\}", os["ascii"])[1:]
 
-    result = ""
-    for i in range(len(segments)):
-        result += color(segments[i], distro["colors"][colors[i]])
+    if recolor == "auto":
+        colors = [
+            int(pattern[3]) - 1 for pattern in findall(r"\$\{c[1-6]\}", os["ascii"])
+        ]
+
+        result = ""
+        for i in range(len(segments)):
+            result += color(segments[i], os["colors"][colors[i]])
+    else:
+        result = color("".join(segments), recolor)
 
     min_length = 45
     if length < min_length:
@@ -72,6 +81,19 @@ def art(distro):
         length = min_length
 
     return {"art": result, "length": length}
+
+
+def ascii_text(os, recolor):
+    result = text2art(os)
+    length = max([len(line) for line in result.splitlines()])
+
+    min_length = 45
+    if length < min_length:
+        spacer = " " * ((min_length - length) // 2)
+        result = "\n".join([spacer + line + spacer for line in result.splitlines()])
+        length = min_length
+
+    return {"art": color(result, recolor), "length": length}
 
 
 def get_name():

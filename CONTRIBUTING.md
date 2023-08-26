@@ -19,6 +19,7 @@ For bug reports, please include:
 
 ## Pull Requests
 
+All pull requests must be in accordance with our [license](COPYING.txt).
 
 ### Code Guidelines
 
@@ -27,7 +28,7 @@ For bug reports, please include:
    - PascalCase in classes
 - Format all code with [`black`](https://github.com/psf/black)
 - Should be compatible with Python >=3.7
-- Do not add dependencies
+- Avoid adding dependencies unless necessary
     - Reference [neofetch](https://github.com/dylanaraps/neofetch) on getting system information without external dependencies
 
 ### Pull Request Codes
@@ -66,7 +67,7 @@ For bug reports, please include:
   <tr>
     <td>Red 🔴</td>
     <td>A pull request that will almost never be accepted. This modifies functionality in a way that goes against the ideas of the project.</td>
-    <td>Do not bother with this idea. If you do want to continue, make your own fetch but follow the terms of our <a href="COPYING">license</a>. If you really think your idea is good, then make an issue with the prefix "Red: ".</td>
+    <td>Do not bother with this idea. If you do want to continue, make your own fetch but follow the terms of our <a href="COPYING.txt">license</a>. If you really think your idea is good, then make an issue with the prefix "Red: ".</td>
     <td>
       <ul>
         <li>Not following <a href="#code-guidelines">code guidelines</a></li>

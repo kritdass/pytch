@@ -8,7 +8,7 @@
 
 ## Description
 
-Pytch is a small and efficient fetch script written in Python with no dependencies. It has a relatively fast execution time of ~20ms and is tested on Python versions 3.7 or newer and PyPy (it will probably work on earlier versions but has not been tested as such). It is configured by editing its source code, though the Python used is relatively simple and readable. Rest assured, if you do not understand something, open up an issue and I will be happy to explain it to you. Pytch currently supports macOS, FreeBSD, and many popular Linux distributions (see [`art.py`](https://github.com/kritdass/pytch/blob/main/src/pytch/art.py) for a list though most are not tested). If support is lacking for your system, please open up an issue and I will add support for your system.
+Pytch is a small and efficient fetch script written in Python with minimal dependencies. It has a relatively fast execution time of ~80ms and is tested on Python versions 3.7 or newer and PyPy (it will probably work on earlier versions but has not been tested as such). Pytch currently supports macOS, FreeBSD, and many popular Linux distributions (see [`art.py`](https://github.com/kritdass/pytch/blob/main/src/pytch/art.py) for a list though most are not tested). If support is lacking for your system, please open up an issue and I will add support for your system.
 
 ## Installation
 
@@ -17,19 +17,25 @@ Pytch is a small and efficient fetch script written in Python with no dependenci
 ```
 You will need a [Nerd Font](https://www.nerdfonts.com/) to see the icons. I use [JetFlow](https://github.com/kritdass/JetFlow).
 
+## Configuration
+
+Pytch is configured by editing a TOML configuration file located at `$HOME/.config/pytch/config.toml`. To generate the default configuration file, simply run `pytch -g`.
+
 ## Todos
 
 - [x] Add CONTRIBUTING.md
 - [x] Add Changelog
+- [x] Add more options
+- [x] Configuration file
+- [ ] Add documentation for the configuration options
+- [ ] Configuration wizard
 - [ ] Windows support
 - [ ] Support for more Linux and BSD distributions
-- [ ] Configuration file and wizard
-- [ ] Add more options
 - [ ] Create manpages
 
 ## Contributing
 
-We strongly encourage contributions, they help us improve Pytch and give us unique insight into what the users of Pytch want. Before contributing, please review [CONTRIBUTING.md](CONTRIBUTING.md).
+We strongly encourage contributions, they help us improve Pytch and give us unique insight into what the users of Pytch want. Before contributing, please review our [contributing guidelines](CONTRIBUTING.md).
 
 ## Acknowledgements
 
@@ -40,4 +46,4 @@ We strongly encourage contributions, they help us improve Pytch and give us uniq
 
 ## License
 
-Pytch is distributed under the [GNU General Public License](https://www.gnu.org/licenses/.). See [`COPYING`](COPYING) for more information.
+Pytch is distributed under the [GNU General Public License](https://www.gnu.org/licenses/.). See [COPYING.txt](COPYING.txt) for more information.
