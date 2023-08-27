@@ -92,8 +92,9 @@ default_config = {
     ],
     "show_icons": True,
     "logo": {
-        "os": "auto",
+        "name": "auto",
         "type": "ascii_image",
+        "ascii_text_font": "small",
         "ascii_text_color": "cyan",
         "ascii_image_color": "auto",
     },
@@ -189,10 +190,10 @@ Report bugs to https://github.com/kritdass/pytch/issues.""",
     attrs = [config["attributes"][attr] for attr in config["attributes_list"]]
     show_icons = config["show_icons"]
     logo = args.logo or (
-        config["logo"]["os"] if config["logo"]["os"] != "auto" else get_name()
+        config["logo"]["name"] if config["logo"]["name"] != "auto" else get_name()
     )
     logo_art = (
-        ascii_text(logo, config["logo"]["ascii_text_color"])
+        ascii_text(logo, config["logo"]["ascii_text_color"], font=config["logo"]["ascii_text_font"])
         if config["logo"]["type"] == "ascii_text"
         else ascii_image(logo, config["logo"]["ascii_image_color"])
     )

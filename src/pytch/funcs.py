@@ -83,8 +83,8 @@ def ascii_image(os, recolor):
     return {"art": result, "length": length}
 
 
-def ascii_text(os, recolor):
-    result = text2art(os)
+def ascii_text(os, recolor, font):
+    result = text2art(os, font=font)
     length = max([len(line) for line in result.splitlines()])
 
     min_length = 45
